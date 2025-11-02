@@ -1,0 +1,17 @@
+import { Controller, Sse, Query } from '@nestjs/common';
+import { interval } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
+import { PlacesProgressService } from '../places-progress.service';
+
+@Controller('places')
+export class PlacesGateway {
+  constructor(private readonly progressService: PlacesProgressService) {}
+
+  @Sse('stream')
+  stream(@Query('city') city: string, @Query('type') type: string) {
+    return interval(1000).pipe(
+      switchMap(() => this.progressService.getProgress(city, type)),
+      map((progress) => ({ data: JSON.stringify(progress) })),
+    );
+  }
+}

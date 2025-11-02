@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Place {
+  id            String   @id @default(cuid())
+  name          String
+  address       String
+  city          String
+  type          String
+  latitude      Float
+  longitude     Float
+  placeId       String  @unique
+  pageNumber    Int
+  detailsCached Boolean   @default(false)
+  enrichedText  String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model CityPlaceFetchStatus {
+  city         String
+  type         String
+  status       String     // pending | in_progress | ready | failed
+  lastFetched  DateTime?
+  progress     Float?
+  @@id([city, type])
+}
