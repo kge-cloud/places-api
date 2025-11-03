@@ -1,7 +1,7 @@
 import { IsNotEmpty, IsString } from 'class-validator';
 
 export enum PlaceType {
-  Cemitery = 'cemitery',
+  Cemetery = 'cemetery',
   Coffee = 'coffee',
   Restaurant = 'restaurant',
   Bakery = 'bakery',

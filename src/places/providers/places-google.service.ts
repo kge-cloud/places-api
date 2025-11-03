@@ -6,10 +6,11 @@ import { IPlacesProvider } from './places-provider.interface';
 @Injectable()
 export class PlacesGoogleService implements IPlacesProvider {
   private readonly apiKey: string;
-  private readonly baseUrl = 'https://maps.googleapis.com/maps/api/place';
+  private readonly baseUrl: string;
 
   constructor(private readonly config: ConfigService) {
     this.apiKey = this.config.get('GOOGLE_API_KEY')!;
+    this.baseUrl = this.config.get('GOOGLE_API_URL')!;
   }
 
   async fetchPlaces(city: string, type: string, pageToken?: string) {

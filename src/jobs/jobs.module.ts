@@ -2,7 +2,11 @@ import { Module } from '@nestjs/common';
 import { BullModule } from '@nestjs/bullmq';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JobsQueue } from './jobs.queue';
-import { PLACES_FETCH_QUEUE } from './jobs.constants';
+import {
+  JOB_LOCK_DURATION,
+  JOB_LOCK_RENEW_TIME,
+  PLACES_FETCH_QUEUE,
+} from './jobs.constants';
 
 @Module({
   imports: [
@@ -17,8 +21,8 @@ import { PLACES_FETCH_QUEUE } from './jobs.constants';
           port: Number(config.get('REDIS_PORT') ?? 6379),
         },
         workerOptions: {
-          lockDuration: 30000,
-          lockRenewTime: 15000,
+          lockDuration: JOB_LOCK_DURATION,
+          lockRenewTime: JOB_LOCK_RENEW_TIME,
         },
       }),
     }),
