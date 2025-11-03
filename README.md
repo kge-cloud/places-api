@@ -113,6 +113,8 @@ npm run start:dev
 
 ### 7️ Testing the API with curl
 
+Note: .env should not be pushed to the repository but it is this time for making the testing easier
+
 #### 7.1️ Login and obtain JWT token
 
 ```bash
