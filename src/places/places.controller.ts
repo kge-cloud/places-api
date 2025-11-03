@@ -1,9 +1,11 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { PlacesService } from './places.service';
 import { QueryPlacesDto } from './dto/query-places.dto';
 import { FetchPlacesDto } from './dto/fetch-places.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('places')
+@UseGuards(AuthGuard('jwt'))
 export class PlacesController {
   constructor(private readonly placesService: PlacesService) {}
 
