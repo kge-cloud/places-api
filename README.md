@@ -79,7 +79,7 @@ Server-Sent Events endpoint streaming live job progress
 ### 2️ Environment Variables
 
 The .env file at the root includes all necessary configuration to run the project locally, except for the GOOGLE_API_KEY.
-To obtain the Google Places API key, please contact: kiril.georgiev.sf@gmail.com.
+To obtain the Google Places API key, please contact: kiril.georgiev.sf@gmail.com. The .env should not be pushed to the repository but it is this time for making the testing easier
 
 ### 3️ Install dependencies
 
@@ -112,8 +112,6 @@ npm run start:dev
 
 
 ### 7️ Testing the API with curl
-
-Note: .env should not be pushed to the repository but it is this time for making the testing easier
 
 #### 7.1️ Login and obtain JWT token
 
