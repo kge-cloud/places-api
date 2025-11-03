@@ -16,7 +16,7 @@ export class PlacesService {
     return this.repo.createOrUpdatePlace(data);
   }
 
-  async getPlaces(query: QueryPlacesDto) {
+  getPlaces = (query: QueryPlacesDto) => {
     try {
       return this.repo.findByCityAndType(
         query.city,
@@ -28,9 +28,9 @@ export class PlacesService {
       console.error(err);
       return { data: null, error: 'Failed to fetch places' };
     }
-  }
+  };
 
-  async enqueueFetch(city: string, type: string) {
+  enqueueFetch = async (city: string, type: string) => {
     return this.jobsQueue.enqueuePlacesFetch(city, type);
-  }
+  };
 }

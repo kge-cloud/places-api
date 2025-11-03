@@ -15,7 +15,7 @@ export class JobsQueue implements OnModuleDestroy {
     this.placesQueue = new Queue(PLACES_FETCH_QUEUE, { connection });
   }
 
-  async enqueuePlacesFetch(city: string, type: string) {
+  enqueuePlacesFetch = async (city: string, type: string) => {
     const jobId = `${city}-${type}`;
     const existing = await this.placesQueue.getJob(jobId);
 
@@ -35,7 +35,7 @@ export class JobsQueue implements OnModuleDestroy {
       return { data: null, error: 'Failed to enqueue job' };
     }
     return { message: 'Job enqueued', jobId };
-  }
+  };
 
   async onModuleDestroy() {
     await this.placesQueue.close();

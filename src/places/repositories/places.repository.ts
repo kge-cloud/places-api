@@ -6,7 +6,9 @@ import { Prisma, Place } from '@prisma/client';
 export class PlacesRepository {
   constructor(private prisma: PrismaService) {}
 
-  async createOrUpdatePlace(data: Prisma.PlaceCreateInput): Promise<Place> {
+  createOrUpdatePlace = async (
+    data: Prisma.PlaceCreateInput,
+  ): Promise<Place> => {
     return this.prisma.place.upsert({
       where: { placeId: data.placeId },
       update: {
@@ -33,14 +35,14 @@ export class PlacesRepository {
         enrichedText: data.enrichedText ?? null,
       },
     });
-  }
+  };
 
-  async findByCityAndType(
+  findByCityAndType = async (
     city: string,
     type: string,
     page = 1,
     limit = 20,
-  ): Promise<Place[]> {
+  ): Promise<Place[]> => {
     const places: Place[] = await this.prisma.place.findMany({
       where: { city, type },
       skip: (page - 1) * limit,
@@ -49,7 +51,7 @@ export class PlacesRepository {
     });
 
     return places;
-  }
+  };
 
   async countByCityAndType(city: string, type: string): Promise<number> {
     return this.prisma.place.count({
